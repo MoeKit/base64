@@ -1,0 +1,29 @@
+{
+  "name": "base64",
+  "version": "1.0.0",
+  "description": "base64 encoder and decoder",
+  "homepage": "https://github.com/airyland/seedit",
+  "author": "idontknow",
+  "maintainers": [
+    "idontknow"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/airyland/seedit.git"
+  },
+  "bugs": {
+    "url": ""
+  },
+  "keywords": [],
+  "licenses": "MIT",
+  "spm": {
+    "main": "./src/base64",
+    "alias": {},
+    "devAlias": {},
+    "engines": {},
+    "devDependencies": {
+      "seajs": "2.2.1",
+      "expect": "0.3.1"
+    }
+  }
+}
