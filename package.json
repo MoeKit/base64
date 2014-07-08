@@ -20,7 +20,9 @@
     "main": "./src/base64",
     "alias": {},
     "devAlias": {},
-    "engines": {},
+    "engines": {
+        "seajs": "2.2.1"
+    },
     "devDependencies": {
       "seajs": "2.2.1",
       "expect": "0.3.1"
