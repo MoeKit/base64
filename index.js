@@ -47,18 +47,18 @@ function _decode(s) {
     }
 
     for (i = 0; i < imax; i += 4) {
-        b10 = ( _getbyte64(s, i) << 18 ) | ( _getbyte64(s, i + 1) << 12 ) | ( _getbyte64(s, i + 2) << 6 ) | _getbyte64(s, i + 3);
-        x.push(String.fromCharCode(b10 >> 16, ( b10 >> 8 ) & 0xff, b10 & 0xff));
+        b10 = (_getbyte64(s, i) << 18) | (_getbyte64(s, i + 1) << 12) | (_getbyte64(s, i + 2) << 6) | _getbyte64(s, i + 3);
+        x.push(String.fromCharCode(b10 >> 16, (b10 >> 8) & 0xff, b10 & 0xff));
     }
 
     switch (pads) {
         case 1:
-            b10 = ( _getbyte64(s, i) << 18 ) | ( _getbyte64(s, i + 1) << 12 ) | ( _getbyte64(s, i + 2) << 6 );
-            x.push(String.fromCharCode(b10 >> 16, ( b10 >> 8 ) & 0xff));
+            b10 = (_getbyte64(s, i) << 18) | (_getbyte64(s, i + 1) << 12) | (_getbyte64(s, i + 2) << 6);
+            x.push(String.fromCharCode(b10 >> 16, (b10 >> 8) & 0xff));
             break;
 
         case 2:
-            b10 = ( _getbyte64(s, i) << 18) | ( _getbyte64(s, i + 1) << 12 );
+            b10 = (_getbyte64(s, i) << 18) | (_getbyte64(s, i + 1) << 12);
             x.push(String.fromCharCode(b10 >> 16));
             break;
     }
@@ -95,31 +95,35 @@ function _encode(s) {
     }
 
     for (i = 0; i < imax; i += 3) {
-        b10 = ( _getbyte(s, i) << 16 ) | ( _getbyte(s, i + 1) << 8 ) | _getbyte(s, i + 2);
+        b10 = (_getbyte(s, i) << 16) | (_getbyte(s, i + 1) << 8) | _getbyte(s, i + 2);
         x.push(_ALPHA.charAt(b10 >> 18));
-        x.push(_ALPHA.charAt(( b10 >> 12 ) & 0x3F));
-        x.push(_ALPHA.charAt(( b10 >> 6 ) & 0x3f));
+        x.push(_ALPHA.charAt((b10 >> 12) & 0x3F));
+        x.push(_ALPHA.charAt((b10 >> 6) & 0x3f));
         x.push(_ALPHA.charAt(b10 & 0x3f));
     }
 
     switch (s.length - imax) {
         case 1:
             b10 = _getbyte(s, i) << 16;
-            x.push(_ALPHA.charAt(b10 >> 18) + _ALPHA.charAt(( b10 >> 12 ) & 0x3F) + _PADCHAR + _PADCHAR);
+            x.push(_ALPHA.charAt(b10 >> 18) + _ALPHA.charAt((b10 >> 12) & 0x3F) + _PADCHAR + _PADCHAR);
             break;
 
         case 2:
-            b10 = ( _getbyte(s, i) << 16 ) | ( _getbyte(s, i + 1) << 8 );
-            x.push(_ALPHA.charAt(b10 >> 18) + _ALPHA.charAt(( b10 >> 12 ) & 0x3F) + _ALPHA.charAt(( b10 >> 6 ) & 0x3f) + _PADCHAR);
+            b10 = (_getbyte(s, i) << 16) | (_getbyte(s, i + 1) << 8);
+            x.push(_ALPHA.charAt(b10 >> 18) + _ALPHA.charAt((b10 >> 12) & 0x3F) + _ALPHA.charAt((b10 >> 6) & 0x3f) + _PADCHAR);
             break;
     }
 
     return x.join("");
 }
 
+var base64Reg = new RegExp("^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{4})$");
+var isBase64 = function(string) {
+    return base64Reg.test(string);
+};
 
 module.exports = {
     decode: _decode,
-    encode: _encode
+    encode: _encode,
+    isBase64: isBase64
 };
-

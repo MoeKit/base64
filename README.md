@@ -15,8 +15,11 @@ BASE64 加密与解密
 
 ## API
 
-### encode
+### `String` encode
 加密
 
-### decode
+### `String` decode
 解密
+
+### `Boolean` isBase64
+判断字符串是否为base64
