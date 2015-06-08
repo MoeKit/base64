@@ -1,4 +1,4 @@
-var base64 = require('../src/base64');
+var base64 = require('../index');
 var expect = require('expect');
 describe('base64', function () {
     it('normal usage', function () {

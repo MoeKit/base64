@@ -17,7 +17,7 @@
   "keywords": [],
   "licenses": "MIT",
   "spm": {
-    "main": "./src/base64",
+    "main": "index.js",
     "alias": {},
     "devAlias": {},
     "engines": {
